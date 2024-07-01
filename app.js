@@ -3,7 +3,7 @@
 const express = require("express");
 const logger = require("morgan");
 const path = require("path");
-const fs = require("fs");
+
 
 
 const port = 5005;
@@ -38,23 +38,12 @@ app.get('/blog', (req, res) => {
 });
 app.get('/api/projects', (req, res) => {
 	const projectsFile = path.join(__dirname, "data", "projects.json");
-	fs.readFile(projectsFile, 'utf8', (err, data) => {
-		if (err) {
-			res.status(500).send('Error reading projects file');
-			return;
-		}
-		res.json(JSON.parse(data));
-	});
+	res.sendFile(projectsFile);
 });
+
 app.get('/api/articles', (req, res) => {
 	const articlesFile = path.join(__dirname, "data", "articles.json");
-	fs.readFile(articlesFile, 'utf8', (err, data) => {
-		if (err) {
-			res.status(500).send('Error reading projects file');
-			return;
-		}
-		res.json(JSON.parse(data));
-	});
+	res.sendFile(articlesFile);
 });
 
 app.get("/*", (req, res) => {
