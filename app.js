@@ -19,10 +19,10 @@ const app = express();
 // - `express.static()` to serve static files from the `public` folder
 // - `express.json()` to parse incoming requests with JSON payloads
 // - `morgan` logger to log all incoming requests
-app.use(express.static("public"));
+
 app.use(express.json());
 app.use(logger("dev"));
-
+app.use(express.static("public"));
 
 // ROUTES
 // Start defining your routes here:
@@ -45,6 +45,7 @@ app.get('/api/articles', (req, res) => {
 	const articlesFile = path.join(__dirname, "data", "articles.json");
 	res.sendFile(articlesFile);
 });
+
 
 app.get("/*", (req, res) => {
 	const notFoundPage = path.join(__dirname, "views", "not-found.html");
